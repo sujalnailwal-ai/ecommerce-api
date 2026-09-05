@@ -9,7 +9,6 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 
 @Service
@@ -29,6 +28,14 @@ public class ProductService {
                 modelMapper.map(element, ProductDto.class))
                 .toList();
 
+    }
+
+    public List<ProductDto> findByCategory(Long id){
+        List<Product> list=productRepository.findByCategoryCategoryId(id);
+        return list.stream()
+                .map((element)
+                        -> modelMapper.map(element, ProductDto.class))
+                .toList();
     }
 
     public void saveProduct(ProductDto productDto){
